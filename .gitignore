@@ -32,4 +32,4 @@ go.work.sum
 .vscode/
 
 # Binaries
-rdb2sqlite*
+/rdb2sqlite

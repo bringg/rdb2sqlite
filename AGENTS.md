@@ -32,7 +32,7 @@
 
 ### Project Structure
 
-```
+```text
 rdb2sqlite/
 ├── cmd/rdb2sqlite/      # Main application binary
 │   └── main.go         # Entry point, CLI, and version info
@@ -120,7 +120,7 @@ CREATE INDEX idx_db_stats_expiration_size ON db_stats(expiration, size);
 
 ## Data Flow
 
-```
+```text
 RDB File
    ↓
 pkg/parser/parser.go (streaming, using github.com/hdt3213/rdb)

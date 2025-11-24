@@ -71,6 +71,14 @@ WHERE expiration IS NULL
 ORDER BY size DESC
 LIMIT 100;
 
+-- Total size of all non-expiring keys
+SELECT
+    COUNT(*) AS key_count,
+    SUM(size) AS total_bytes,
+    SUM(size) / 1024.0 / 1024.0 AS total_mb
+FROM db_stats
+WHERE expiration IS NULL;
+
 -- Top 100 keys with longest expiration (furthest in the future)
 -- expiration is stored as ISO-8601 timestamp
 SELECT key, type, size_readable, expiration,
@@ -88,6 +96,14 @@ SELECT
 FROM db_stats
 GROUP BY prefix
 ORDER BY total_size DESC;
+
+-- Total size of all keys starting with a specific prefix
+SELECT
+    COUNT(*) AS key_count,
+    SUM(size) AS total_bytes,
+    SUM(size) / 1024.0 / 1024.0 AS total_mb
+FROM db_stats
+WHERE key LIKE 'authentication:%';
 
 -- Memory by data type
 SELECT type, COUNT(*), SUM(size) AS total_bytes
